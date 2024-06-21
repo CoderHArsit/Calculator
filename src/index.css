@@ -1,6 +1,4 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 
 * {
   margin: 0;
@@ -32,7 +30,6 @@ body {
   gap: 1rem;
 }
 
-
 .calculator {
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
@@ -40,7 +37,15 @@ body {
   width: 100%;
   overflow: hidden;
 }
-
+/* HISTORY WINDOW */
+.history_tab {
+  background-color: rgb(20, 20, 20);
+  margin: 3px 3px;
+}
+.history_tab button{
+  cursor: pointer;
+}
+/* RESULT DISPLAY WINDOW */
 .displayWindow {
   background-color: rgb(20, 20, 20);
   display: flex;
@@ -55,7 +60,7 @@ body {
   overflow-x: auto;
   width: 100%;
   text-align: right;
-  color: rgba(255, 255, 255, 0.3);
+  color: white;
   font-weight: 600;
   scrollbar-width: none;
 }
@@ -64,7 +69,7 @@ body {
   font-size: 2.2rem;
   font-weight: 600;
 }
-
+/* kEY WINDOW */
 .keysWindow {
   background-color: rgb(29, 29, 29);
   display: flex;
@@ -83,58 +88,93 @@ body {
 .keysWindow button:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
-
+/* SCIENTIFIC KEYS */
 .keys_scientific {
-  /* width: 30%; */
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
-.scibut{
+
+.scibut {
   margin: 1px 1px;
   background-color: #0f0f0f;
 }
-.line {
-  margin-block: 1.5rem;
-  width: 2px;
-  background-color: rgba(255, 255, 255, 0.08);
+/* OPERATORS */
+.opekey {
+  display: flex;
+  flex-direction: column;
+  color: #0f0f0f;
 }
 
-.keys {
-  /* flex: 1; */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.opekey{
-
-display: flex;
-flex-direction: column;
-color: #0f0f0f;
-}
-.opbut{
+.opbut {
   padding: 1rem 1rem;
   background-color: #ffa600;
   margin: 1px 1px;
-
-
   font-weight: 900;
 }
 
-.keybut{
+.keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.keybut {
   margin: 1px 1px;
   background-color: rgba(255, 255, 255, 0.2);
 }
-
-.keys_basic .equal {
-  background-color: #00ff62;
-  color: #0f0f0f;
+.keybut :hover{
+  background-color: azure;
+  color: #000;
 }
 
 .keys_basic .number {
   color: white;
   font-weight: 600;
 }
+/* LIGHT MODE CSS */
+.calculator.light {
+  background-color: #fff;
+  color: #000;
+}
 
-@media (max-width: 610px) {
+.calculator.light .keysWindow {
+  background-color: #f0f0f0;
+}
+
+.calculator.light .displayWindow {
+  background-color: #979595;
+  color: #000;
+}
+
+.calculator.light .history_tab {
+  background-color: #e0e0e0;
+}
+
+.calculator.light .keysWindow button {
+  color: rgba(0, 0, 0, 0.7);
+}
+.App.light{
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.calculator.light .keysWindow button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.calculator.light .scibut {
+  background-color: #e0e0e0;
+}
+
+.calculator.light .opbut {
+  background-color: #ffa600;
+}
+
+.calculator.light .keybut {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+ @media (max-width: 610px) {
   body {
     padding: 1rem;
   }
@@ -142,6 +182,15 @@ color: #0f0f0f;
   .keysWindow {
     flex-direction: column;
     gap: 0;
+  }
+  .opekey{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .opekey button{
+    margin: 5px;
+    width: 200px;
   }
 
   .line {
@@ -152,4 +201,34 @@ color: #0f0f0f;
     width: 100%;
     grid-template-columns: repeat(5, 1fr);
   }
+} 
+
+/* .sciDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #1f1f1f;
+  border: 1px solid #555;
+  border-radius: 5px;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
+
+.sciDropdown button {
+  margin: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sciDropdown button:hover {
+  background-color: #555;
+} */
