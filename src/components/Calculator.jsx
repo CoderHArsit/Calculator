@@ -5,14 +5,14 @@ import KeysWindow from "./KeysWindow";
 import ConfettiExplosion from 'react-confetti-explosion';
 import confetti from 'canvas-confetti';
 import HistoryWindow from "./HistoryWindow";
-const Calculator = () => {
+const Calculator = ({toggle}) => {
   const [expression, setExpression] = useState("");
   const [history, setHistory] = useState([]); // State for history
   const [displayEXP, setDisplayEXP] = useState("");
   const [result, setResult] = useState("0");
   const [mode, setMode] = useState("rad");
   const [memory, setMemory] = useState(0); // Added state for memory
-
+ 
   const sciFunc = {
     sin: "sin",
     cos: "cos",
@@ -71,15 +71,19 @@ const Calculator = () => {
       setResult("An Error Occurred!");
     }
   }
-
+  const [minus, setMinus]=useState("-");
   function handleButton(value) {
     if (value === "c") {
       setExpression("");
       setDisplayEXP("");
       setResult("0");
     } else if (value === "DEL") {
-      setDisplayEXP(displayEXP.slice(0, -1));
-      setExpression(expression.slice(0, -1));
+      if (typeof displayEXP === 'string') {
+        setDisplayEXP(displayEXP.slice(0, -1));
+      }
+      if (typeof expression === 'string') {
+        setExpression(expression.slice(0, -1));
+      }
     } else if (sciFunc.hasOwnProperty(value)) {
       setDisplayEXP(displayEXP + value);
       setExpression(expression + sciFunc[value]);
@@ -90,7 +94,19 @@ const Calculator = () => {
         setDisplayEXP(displayEXP + value);
         setExpression(expression.replace(lastNum, factorial(num)));
       }
-    } else if (value === "=") calcResult();
+    } 
+    
+    else if(value ==="+/-"){
+        if(minus==="-"){
+          setExpression(expression+"-");
+          setDisplayEXP(displayEXP+"-");
+          setMinus("+");
+        }
+        else{
+          setMinus("-");
+        }
+    }
+    else if (value === "=") calcResult();
     else if (value === "mode") {
       setMode(mode === "rad" ? "deg" : "rad");
     } else if (value === "MC") {
@@ -115,20 +131,26 @@ const Calculator = () => {
     return result;
   }
 
-  const [isExploding, setIsExploding] = React.useState(true);
+  
   function extractLastNum(exp) {
     const numbers = exp.match(/\d+/g);
     return numbers ? numbers[numbers.length - 1] : null;
   }
 
+ 
+
+
   return (
-    <div className="calculator">
-      <DisplayWindow expression={displayEXP} result={result} />
-      <KeysWindow handleButton={handleButton} />
+    <div className={`calculator ${toggle}`}>
+      <div className="history_tab">
+      <HistoryWindow toggle={toggle} history={history} /> 
+      </div>
+      <DisplayWindow toggle={toggle} expression={displayEXP} result={result} />
+      <KeysWindow  handleButton={handleButton} />
       <button onClick={() => handleButton("mode")}>Mode: {mode}</button>
 
-      <button> DARK </button>
-      <HistoryWindow history={history} /> 
+      
+      
     </div>
   );
 };

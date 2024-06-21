@@ -1,12 +1,16 @@
-import React from "react";
-
-const HistoryWindow = ({ history }) => {
+import React, { useState } from "react";
+import { FaHistory } from "react-icons/fa";
+const HistoryWindow = ({ history, toggle }) => {
+  const [his, setHis]= useState(false);
+  const handleClick=()=>{
+    setHis(prevState => !prevState);
+  }
   return (
-    <div className="historyWindow">
-      <h2>History</h2>
+    <div className={`historyWindow ${toggle}`}>
+      <button style={{margin:"3px 3px" }} onClick={handleClick}><FaHistory size={24}/></button>
       <ul>
-        {history.map((entry, index) => (
-          <li key={index}>
+        {his && history.map((entry, index) => (
+          <li style={{margin:"3px 2px"}} key={index}>
             {entry.expression} = {entry.result}
           </li>
         ))}
@@ -16,3 +20,4 @@ const HistoryWindow = ({ history }) => {
 };
 
 export default HistoryWindow;
+
